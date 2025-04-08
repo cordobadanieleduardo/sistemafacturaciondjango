@@ -245,10 +245,11 @@
             type:"GET",
             url: path,
             success: function(r){
+
                 console.log(r);
                 console.log(r.existencia);
                 console.log(r.estado);
-
+debugger
                 if(r.existencia<=0 || !r.estado){
                     mensaje("Producto No Tiene Existencia o está inactivo",'orange')
                     $("#codigo").val("");

@@ -1,24 +1,98 @@
-![Curso Sistema de Compra y Facturación con Python y Django](logo.png)
-# Curso Sistema de Compra y Facturación con Python y Django 🐍 
-##  🎖️ [Obténlo con hasta 95% Descuento Oficial en Udemy](https://www.udemy.com/course/sistema-de-compra-y-facturacion-con-python-usando-django/?referralCode=EDA7FC277025EB39FBB8)  🎖️
+mkdir sistemafacdjango
+>cd sistemafacdjango
+git clone https://github.com/debsconsultores/sis_cmp_fac_py_dj_2.2-.git sistema
+cd sistema
+git log
+py -m venv ..\venv
+..\venv\Scripts\activate
 
-##### Código Fuente del Proyecto
+pip freeze
+py -m pip install --upgrade pip
 
-### 💥 Descuento de hasta 95% 💓
-##### Precio $9.99 en cualquier curso
+Django==5.2
 
-## ☷ Cursos ofrecidos con su Descuento:
 
-☞ Desarrollo Web con Python usando Django (Hasta 95%)
+pip install Django psycopg[binary] Pillow reportlab django-userforeignkey djangorestframework
+pip install dj-database-url gunicorn PyPDF2 pylint xhtml2pdf python-decouple whitenoise
+pip install mysqlclient
 
-☞ Domina el ORM de Django (Hasta 90%)
+pip freeze
 
-☞ Replicación de Datos con SymmetricDS (Hasta 90%)
 
-☞ Desarrolla Aplicaciones en Capa con ADO NET (Hasta 90%)
 
-☞ Entity FrameWork para principiantes (Hasta 60%)
 
-##  [Más Cursos y Descuentos al precio oficial de Udemy](https://mailchi.mp/1fc9a9e05a5c/debs-8-cursos-oficial) 
 
-## ☝ ☝ ☝ ☝ ☝ ☝ ☝☝
+
+
+
+code .
+
+
+
+
+
+
+
+
+10. Migrar
+python manage.py migrate
+
+11. Crear Super Usuario
+python manage.py createsuperuser --username test --email test@mail.com
+
+12. Levantar Servidor
+py manage.py runserver 0.0.0.0:8000
+
+
+
+
+
+
+
+
+
+
+
+Manejo de paquetes con PIP
+
+package-name = Nombre del Paquete a Instalar
+
+Instalar 
+
+pip install package-name
+
+Instalar una versión específica del paquete
+
+pip install package-name==1.0.0
+
+Buscar en PyPI por una paquete en particular :
+
+pip search "query"
+
+Para ver detalles de un paquete instalado:
+
+pip show package-name
+
+Listado de paquetes instalados:
+
+pip list
+
+pip freeze
+
+Listar todos los paquetes desactualizados:
+
+pip list --outdated
+
+Actualizar un paquete desactualizado:
+
+pip install package-name --upgrade
+
+Tenga en cuenta que algunas versiones antiguas de paquetes son removidas automáticamente por PIP cuando se actualizan a una versión nueva del paquete
+
+Para reinstalar completamente el paquete:
+
+pip install package-name --upgrade --force-reinstall
+
+Para deshacerse completamente de un paquete:
+
+pip uninstall package-name

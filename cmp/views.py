@@ -195,3 +195,12 @@ class CompraDetDelete(SinPrivilegios, generic.DeleteView):
     def get_success_url(self):
           compra_id=self.kwargs['compra_id']
           return reverse_lazy('cmp:compras_edit', kwargs={'compra_id': compra_id})
+      
+      
+      
+
+
+def chartView(request):
+    
+    # return render(request, template_name='chart/chart.html',)
+    return render(request, template_name='chart/chart2.html',)

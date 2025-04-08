@@ -2,7 +2,7 @@ from django.urls import path, include
 
 from .views import ProveedorView,ProveedorNew, ProveedorEdit, \
     proveedorInactivar, \
-    ComprasView, compras, CompraDetDelete
+    ComprasView, compras, CompraDetDelete, chartView
 
 from .reportes import reporte_compras, imprimir_compra
 
@@ -19,4 +19,7 @@ urlpatterns = [
 
     path('compras/listado', reporte_compras, name='compras_print_all'),
     path('compras/<int:compra_id>/imprimir', imprimir_compra,name="compras_print_one"),
+    
+    
+    path('chart/', chartView,name="chart_view"),
 ]

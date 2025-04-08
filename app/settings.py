@@ -22,11 +22,10 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 # See https://docs.djangoproject.com/en/2.2/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-# SECRET_KEY = 'pzmaeg=(8-0#5yt^s#lk5+1km!h3jbg4wchu6souuv!9l#%2tc'
 SECRET_KEY=config("SECRET_KEY")
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = True
 
 ALLOWED_HOSTS = ["127.0.0.1",".herokuapp.com"]
 
@@ -78,20 +77,27 @@ TEMPLATES = [
     },
 ]
 
-WSGI_APPLICATION = 'app.wsgi.application'
+#WSGI_APPLICATION = 'app.wsgi.application'
 
 
 # Database
 # https://docs.djangoproject.com/en/2.2/ref/settings/#databases
 
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.sqlite3',
+#         'NAME': 'mydatabase',
+#     }
+# }
+
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': 'db_djfull',
+        'ENGINE': 'django.db.backends.mysql',
+        'NAME': 'db_client',
         'HOST': 'localhost',
-        'USER': 'debs',
-        'PASSWORD': '123456',
-        'PORT': 5435
+        'USER': 'root',
+        'PASSWORD': '12345',
+        'PORT': 3306
     }
 }
 
@@ -118,9 +124,9 @@ AUTH_PASSWORD_VALIDATORS = [
 # Internationalization
 # https://docs.djangoproject.com/en/2.2/topics/i18n/
 
-LANGUAGE_CODE = 'es-ni'
+LANGUAGE_CODE = 'es-co'
 
-TIME_ZONE = 'America/Managua'
+TIME_ZONE = 'America/Bogota'
 
 USE_I18N = True
 
@@ -144,5 +150,11 @@ MEDIA_URL = '/media/'
 LOGIN_REDIRECT_URL = '/'
 LOGOUT_REDIRECT_URL = '/login/'
 
-db_from_env = dj_database_url.config(conn_max_age=500)
-DATABASES['default'].update(db_from_env)
+# COnfiguracion para despliege
+# db_from_env = dj_database_url.config(conn_max_age=500)
+# DATABASES['default'].update(db_from_env)
+
+
+DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+BASE_COUNTRY = 'CO'

@@ -1,196 +1,199 @@
 {% extends 'base/base.html' %}
-
 {% block page_content %}
+
 <form method="post" id="frmFacturas">
     {% csrf_token %}
-<div class="card shadow mb-4">
-    <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
-        <a href="#" class="btn btn-danger">Guardar</a>
-        <a href="{% url 'fac:factura_imprimir_one' enc.id %}" class="btn btn-success" target="_factura">Imprimir</a>
-        <a href="{% url 'fac:factura_list' %}" class="btn btn-info">Cancelar</a>
-    </div>
-    <div class="card-body">
-        <div class="content">
-            <!-- Sección Superior -->
-            <div class="row">
-                <!-- Sección Izquierda -->
-                <div class="col-lg-6 form-group">
-                    <div class="content">
-                        <div class="row ">
-                            <div class="col-lg-1">No.:</div>
-                            <div class="col-lg-4">
-                                <input type="text" name="enc_id" id="enc_id" readonly class="form-control">
-                            </div>
-                            <div class="col-lg-2">
-                                Cliente:
-                            </div>
-                            <div class="col-lg-5 form-group">
-                                <!-- <select name="enc_cliente" id="enc_cliente" class="form-control">
-                                    <option value="0">Seleccione Cliente</option>
-                                    {% for item in clientes %}
-                                        <option value="{{item.id}}">{{ item.nombres }} {{item.apellidos}} </option>
-                                    {% endfor %}
-                                </select> -->
-                                <div class="row">
-                                    <div class="col-lg-11 col-md-11">
-                                        <select name="enc_cliente" id="enc_cliente" class="form-control">
-                                            <option value="0">Seleccione Cliente</option>
-                                            {% for item in clientes %}
-                                                <option value="{{item.id}}">{{ item.nombres }} {{item.apellidos}} </option>
-                                            {% endfor %}
-                                        </select>
-                                    </div>
-                                    <div class="col-lg-1 col-md-1">
-                                        <button class="btn btn-outline-danger btn-sm" id="btnEditCliente"><i class="far fa-edit"></i></button>
+    <div class="card shadow mb-4">
+        <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
+            <a href="#" class="btn btn-danger">Guardar</a>
+            <a href="{% url 'fac:factura_imprimir_one' enc.id %}" class="btn btn-success" target="_factura">Imprimir</a>
+            <a href="{% url 'fac:factura_list' %}" class="btn btn-info">Cancelar</a>
+        </div>
+        <div class="card-body">
+            <div class="content">
+                <!-- Sección Superior -->
+                <div class="row">
+                    <!-- Sección Izquierda -->
+                    <div class="col-lg-6 form-group">
+                        <div class="content">
+                            <div class="row ">
+                                <div class="col-lg-1">No.:</div>
+                                <div class="col-lg-4">
+                                    <input type="text" name="enc_id" id="enc_id" readonly class="form-control">
+                                </div>
+                                <div class="col-lg-2">
+                                    Cliente:
+                                </div>
+                                <div class="col-lg-5 form-group">
+                                    <!-- <select name="enc_cliente" id="enc_cliente" class="form-control">
+                                        <option value="0">Seleccione Cliente</option>
+                                        {% for item in clientes %}
+                                            <option value="{{item.id}}">{{ item.nombres }} {{item.apellidos}} </option>
+                                        {% endfor %}
+                                    </select> -->
+                                    <div class="row">
+                                        <div class="col-lg-11 col-md-11">
+                                            <select name="enc_cliente" id="enc_cliente" class="form-control">
+                                                <!-- <option value="0">Seleccione Cliente</option> -->
+                                                {% for item in clientes %}
+                                                    <option value="{{item.id}}">{{ item.nombres }} {{item.apellidos}} </option>
+                                                {% endfor %}
+                                            </select>
+                                        </div>
+                                        <div class="col-lg-1 col-md-1">
+                                            <button class="btn btn-outline-danger btn-sm" id="btnEditCliente"><i class="far fa-edit"></i></button>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
-                        </div>
 
-                        <div class="row">
-                            <div class="col-lg-6 p-2" >
-                                <div class="row">
-                                    <div class="col-lg-2">
-                                        Fecha:
+                            <div class="row">
+                                <div class="col-lg-6 p-2" >
+                                    <div class="row">
+                                        <div class="col-lg-2">
+                                            Fecha:
+                                        </div>
+                                        <div class="col-lg-8 form-group">
+                                            <input type="text" name="fecha" id="fecha" class="form-control form-control-user" 
+                                            value="{{ enc.fecha|date:'Y-m-d' }}" readonly />
+                                        </div>
                                     </div>
-                                    <div class="col-lg-8 form-group">
-                                        <input type="text" name="fecha" id="fecha" class="form-control form-control-user" 
-                                        value="{{ enc.fecha|date:'Y-m-d' }}" readonly />
+                                </div>
+                                <div class="col-lg-6 p-2 form-group">
+                                    <div class="row">
+                                        <div class="col-lg-3">Sub Total:</div>
+                                        <div class="col-lg-8">
+                                            <input type="number" class="form-control text-right" value="0.00" readonly
+                                            name="sub_total" id="sub_total">
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-lg-3">Descuento:</div>
+                                        <div class="col-lg-8">
+                                            <input type="number" class="form-control text-right" value="0.00" disabled
+                                                name="descuento" id="descuento">
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-lg-3">Total:</div>
+                                        <div class="col-lg-8">
+                                            <input type="number" class="form-control text-right" value="0.00" disabled
+                                                name="total" id="total">
+                                        </div>
                                     </div>
                                 </div>
                             </div>
-                            <div class="col-lg-6 p-2 form-group">
-                                <div class="row">
-                                    <div class="col-lg-3">Sub Total:</div>
-                                    <div class="col-lg-8">
-                                        <input type="number" class="form-control text-right" value="0.00" readonly
-                                        name="sub_total" id="sub_total">
-                                    </div>
-                                </div>
-                                <div class="row">
-                                    <div class="col-lg-3">Descuento:</div>
-                                    <div class="col-lg-8">
-                                        <input type="number" class="form-control text-right" value="0.00" disabled
-                                            name="descuento" id="descuento">
-                                    </div>
-                                </div>
-                                <div class="row">
-                                    <div class="col-lg-3">Total:</div>
-                                    <div class="col-lg-8">
-                                        <input type="number" class="form-control text-right" value="0.00" disabled
-                                            name="total" id="total">
-                                    </div>
-                                </div>
+                        </div>
+                    </div>
+                    <!-- Fin Sección Izquierda -->
+
+
+                    <!-- Sección Derecha -->
+                    <div class="col-lg-6 from-group">
+                        <div class="row p-2">
+                            <div class="col-lg-1">Cod</div>
+                            <div class="col-lg-3">
+                                <input type="text" class="form-control" name="codigo" id="codigo" placeholder="Cód. Producto">
                             </div>
-                        </div>
-                    </div>
-                </div>
-                <!-- Fin Sección Izquierda -->
-
-
-                <!-- Sección Derecha -->
-                <div class="col-lg-6 from-group">
-                    <div class="row p-2">
-                        <div class="col-lg-1">Cod</div>
-                        <div class="col-lg-3">
-                            <input type="text" class="form-control" name="codigo" id="codigo" placeholder="Cód. Producto">
-                        </div>
-                        <div class="col-lg-7">
-                            <input type="text" class="form-control" name="descripcion" id="descripcion" placeholder="Descripción" disabled>
-                        </div>
-                        <div class="col-lg-1">
-                            <button type="button" class="btn btn-info" id="btnBuscar">
-                                <i class="fab fa-searchengin"></i>
-                            </button>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-lg-1">Cant</div>
-                        <div class="col-lg-3">
-                            <input type="number" class="form-control" name="cantidad" id="cantidad" placeholder="Cantidad">
-                            <input type="hidden" class="form-control" name="existencia" id="existencia">
-                        </div>
-                        <div class="col-lg-4">
-                            <input type="number" class="form-control" name="precio" id="precio" placeholder="Precio" readonly>
-                        </div>
-                        <div class="col-lg-3">
-                            <input type="number" class="form-control" name="descuento_detalle" id="descuento_detalle" placeholder="Descuento">
-                        </div>
-                        <div class="col-lg-1">
-                            <button type="submit" class="btn btn-danger" id="btnGuardar"> <i class="far fa-plus-square"></i> </button>
-                        </div>
-                    </div>
-                    <div class="row p-1">
-                        <div class="col-lg-9 text-right">Sub Total</div>
-                        <div class="col-lg-3">
-                            <input type="number" class="form-control" name="sub_total_detalle" id="sub_total_detalle" placeholder="Sub Total"
-                             value="0.00" disabled>
-                        </div>
-                    </div>
-                    <div class="row p-1">
-                        <div class="col-lg-9 text-right">Total</div>
-                        <div class="col-lg-3">
-                            <input type="number" class="form-control" name="total_detalle" id="total_detalle" placeholder="Total"
-                             value="0.00" disabled>
-                        </div>
-                    </div>
-                </div>
-                <!-- Fin Sección Derecha -->
-            </div>
-            <!-- Fin Sección Superior -->
-            <!-- Inicio Detalle -->
-            <hr>
-            <div class="row p-1">
-                <div class="col-lg-12">
-                    <table
-                        data-toggle="table"
-                        data-pagination="true"
-                        data-search="true"
-                        data-show-columns="true"
-                        data-show-toggle="true"
-                        data-show-fullscreen="true"
-                        data-locale="es-NI"
-                        >
-                        <thead>
-                            <th data-sortable="true" data-field="id">Id.</th>        
-                            <th data-sortable="true" data-field="codigo">Código</th>
-                            <th data-sortable="true" data-field="descripcion">Descripción</th>
-                            <th data-field="cantidad">Cant</th>
-                            <th data-field="subtotal">S. Total</th>
-                            <th data-field="descuento">Des.</th>
-                            <th data-field="total">Total</th>
-                            <th class="all">Acciones</th>
-                        </thead>
-                        <tbody>
-                            {% for item in det%}
-                            <tr>
-                                <td>{{ item.id }}</td>
-                                <td>{{ item.producto }}</td>
-                                <td>{{ item.producto.descripcion }}</td>
-                                <td>{{ item.cantidad }}</td>
-                                <td>{{ item.sub_total }}</td>
-                                <td>{{ item.descuento }}</td>
-                                <td>{{ item.total }}</td>
-                            <td>
-                                <button type="button" class="btn btn-warning btn-circle"
-                                    onclick="borrar_detalle({{ item.id }})">
-                                    <i class="fas fa-history"></i>
+                            <div class="col-lg-7">
+                                <input type="text" class="form-control" name="descripcion" id="descripcion" placeholder="Descripción" disabled>
+                            </div>
+                            <div class="col-lg-1">
+                                <button type="button" class="btn btn-info" id="btnBuscar">
+                                    <i class="fab fa-searchengin"></i>
                                 </button>
-                            </td>
-                            </tr>
-                            {% endfor %}
-                        </tbody>
-                    </table>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-lg-1">Cant</div>
+                            <div class="col-lg-3">
+                                <input type="number" class="form-control" name="cantidad" id="cantidad" placeholder="Cantidad">
+                                <input type="hidden" class="form-control" name="existencia" id="existencia">
+                            </div>
+                            <div class="col-lg-4">
+                                <input type="number" class="form-control" name="precio" id="precio" placeholder="Precio" readonly>
+                            </div>
+                            <div class="col-lg-3">
+                                <input type="number" class="form-control" name="descuento_detalle" id="descuento_detalle" placeholder="Descuento">
+                            </div>
+                            <div class="col-lg-1">
+                                <button type="submit" class="btn btn-danger" id="btnGuardar"> <i class="far fa-plus-square"></i> </button>
+                            </div>
+                        </div>
+                        <div class="row p-1">
+                            <div class="col-lg-9 text-right">Sub Total</div>
+                            <div class="col-lg-3">
+                                <input type="number" class="form-control" name="sub_total_detalle" id="sub_total_detalle" placeholder="Sub Total"
+                                value="0.00" disabled>
+                            </div>
+                        </div>
+                        <div class="row p-1">
+                            <div class="col-lg-9 text-right">Total</div>
+                            <div class="col-lg-3">
+                                <input type="number" class="form-control" name="total_detalle" id="total_detalle" placeholder="Total"
+                                value="0.00" disabled>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Fin Sección Derecha -->
                 </div>
+                <!-- Fin Sección Superior -->
+                <!-- Inicio Detalle -->
+                <hr>
+                <div class="row p-1">
+                    <div class="col-lg-12">
+                        <table
+                            data-toggle="table"
+                            data-pagination="true"
+                            data-search="true"
+                            data-show-columns="true"
+                            data-show-toggle="true"
+                            data-show-fullscreen="true"
+                            data-locale="es-NI"
+                            >
+                            <thead>
+                                <th data-sortable="true" data-field="id">Id.</th>        
+                                <th data-sortable="true" data-field="codigo">Código</th>
+                                <th data-sortable="true" data-field="descripcion">Descripción</th>
+                                <th data-field="cantidad">Cant</th>
+                                <th data-field="subtotal">S. Total</th>
+                                <th data-field="descuento">Des.</th>
+                                <th data-field="total">Total</th>
+                                <th class="all">Acciones</th>
+                            </thead>
+                            <tbody>
+                                {% for item in det%}
+                                <tr>
+                                    <td>{{ item.id }}</td>
+                                    <td>{{ item.producto }}</td>
+                                    <td>{{ item.producto.descripcion }}</td>
+                                    <td>{{ item.cantidad }}</td>
+                                    <td>{{ item.sub_total }}</td>
+                                    <td>{{ item.descuento }}</td>
+                                    <td>{{ item.total }}</td>
+                                <td>
+                                    <button type="button" class="btn btn-warning btn-circle"
+                                        onclick="borrar_detalle({{ item.id }})">
+                                        <i class="fas fa-history"></i>
+                                    </button>
+                                </td>
+                                </tr>
+                                {% endfor %}
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+                <!-- Fin Detalle -->
             </div>
-            <!-- Fin Detalle -->
         </div>
     </div>
-</div>
 </form>
 {% endblock %}
 {% block js_page %}
+
 <script>
+
+    let id_vcliente = 0;
     function calcular_detalle()
     {
         var cant,prec,desc,stotal,total;
@@ -246,10 +249,10 @@
             url: path,
             success: function(r){
 
-                console.log(r);
-                console.log(r.existencia);
-                console.log(r.estado);
-debugger
+                // console.log(r);
+                // console.log(r.existencia);
+                // console.log(r.estado);
+
                 if(r.existencia<=0 || !r.estado){
                     mensaje("Producto No Tiene Existencia o está inactivo",'orange')
                     $("#codigo").val("");
@@ -314,17 +317,35 @@ debugger
         });
 
         $("#enc_id").val("{{ enc.id }}");
-        $("#enc_cliente").val("{{ enc.cliente.id }}").change();
+        
         $("#fecha").val("{{ enc.fecha|date:'Y-m-d' }}");
         $("#sub_total").val("{{ enc.sub_total }}");
         $("#descuento").val("{{ enc.descuento }}");
-        $("#total").val({{ enc.total }});
+        $("#total").val("{{ enc.total }}");
 
-        // $('#enc_cliente').select2().select2('val', $('#enc_cliente option:eq(1)').val());
-        // https://select2.org/programmatic-control/add-select-clear-items
-        $("#enc_cliente").data('select2').trigger('select', {
-            data: {"id": 3}
-        });
+        
+        // alert(id_vcliente+"-"+"{{ enc.cliente.id }}")
+
+        var idCliente = $("#enc_cliente").val();
+       
+        if(idCliente===null || idCliente===undefined || idCliente==0){
+            // url = "/fac/clientes/new" + qs;
+            //alert(url);
+            // abrir_modal(url);
+            $('#enc_cliente').select2('val', $('#enc_cliente option:eq(0)').val());        
+        }else{
+            id_vcliente = +idCliente;
+            // alert(id_vcliente);
+            // abrir_modal(url);
+            if(id_vcliente >0){
+                $("#enc_cliente").val(id_vcliente).change();
+                // $('#enc_cliente').select2('val', $('#enc_cliente option:eq('+id_vcliente+')').val());        
+            }
+            // https://select2.org/programmatic-control/add-select-clear-items
+        }
+
+
+
 
     });
 
@@ -410,14 +431,16 @@ debugger
         var idCliente = $("#enc_cliente").val();
         var url;
         const qs = "?t=fc";
-        // alert(idCliente)
+        alert(idCliente)
 
         if(idCliente===null || idCliente===undefined || idCliente==0){
             // url = "/fac/clientes/new" + qs;
-            url = "{% url 'fac:fac_cliente_add' %}" + qs
+            url = "{% url 'fac:fac_cliente_add' %}" + qs;
             //alert(url);
             // abrir_modal(url);
         }else{
+            id_vcliente = idCliente;
+            
             url = "/fac/facturas/clientes/" + idCliente + qs;
             //alert(url);
             // abrir_modal(url);
@@ -426,27 +449,35 @@ debugger
         var token = '{{csrf_token}}';
     });
 
-$("#popup").on('hidden.bs.modal',function(){
-    const a = $("#id").val()
-    // alert(a)
-    var url="{% url 'api:cliente_list' %}"
-    $.ajax({
-        type:"GET",
-        url:url,
-        success: function(data){
-            console.log(data)
-            $("#enc_cliente").find('option').remove()
-            $("#enc_cliente").append('<option value="0">Seleccione Cliente</option>')
-            for(var i=0;i<data.length;i++){
-                $("#enc_cliente").append(`<option value="${data[i].id}">${data[i].nombres} ${data[i].apellidos} </option>`)
+    $("#popup").on('hidden.bs.modal',function(){
+        const idCliente = $("#id").val()
+        // alert(id_cliente)
+        
+        var url="{% url 'api:cliente_list' %}"
+        $.ajax({
+            type:"GET",
+            url:url,
+            success: function(data){
+                // console.log(data)
+                $("#enc_cliente").find('option').remove()
+                // $("#enc_cliente").append('<option value="0">Seleccione Cliente</option>')
+                for(var i=0;i<data.length;i++){
+                    $("#enc_cliente").append(`<option value="${data[i].id}">${data[i].nombres} ${data[i].apellidos} </option>`)
+                }
+
+                if(idCliente===null || idCliente===undefined || idCliente==0){
+                
+                }else{
+                    $("#enc_cliente").val(idCliente).change()
+                    id_vcliente = idCliente
+                }
+                // $('#enc_cliente').select2('val', $('#enc_cliente option:eq(0)').val());        
+            },
+            error: function(data){
+                console.log(data)
             }
-            $("#enc_cliente").val(a).change()
-        },
-        error: function(data){
-            console.log(data)
-        }
+        })
+        return false
     })
-    return false
-})
 </script>
 {% endblock %}

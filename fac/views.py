@@ -151,7 +151,7 @@ def facturas(request,id=None):
             encabezado = {
                 'id':0,
                 'fecha':datetime.today(),
-                'cliente':0,
+                'cliente':1,
                 'sub_total':0.00,
                 'descuento':0.00,
                 'total': 0.00
@@ -201,19 +201,20 @@ def facturas(request,id=None):
         descuento = request.POST.get("descuento_detalle")
         total = request.POST.get("total_detalle")
 
-        prod = Producto.objects.get(codigo=codigo)
-        det = FacturaDet(
-            factura = enc,
-            producto = prod,
-            cantidad = cantidad,
-            precio = precio,
-            sub_total = s_total,
-            descuento = descuento,
-            total = total
-        )
         
-        if det:
-            det.save()
+        if prod:= Producto.objects.get(codigo=codigo):
+            det = FacturaDet(
+                factura = enc,
+                producto = prod,
+                cantidad = cantidad,
+                precio = precio,
+                sub_total = s_total,
+                descuento = descuento,
+                total = total
+            )
+            
+            if det:
+                det.save()
         
         return redirect("fac:factura_edit",id=id)
 
@@ -268,7 +269,7 @@ def cliente_add_modify(request,pk=None):
     if request.method=="GET":
         context["t"]="fc"
         if not pk:
-            form = ClienteForm()
+            form = ClienteForm()          
         else:
             cliente = Cliente.objects.filter(id=pk).first()
             form = ClienteForm(instance=cliente)

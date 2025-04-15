@@ -111,7 +111,7 @@ def compras(request,compra_id=None):
             }
             form_compras = ComprasEncForm(e)
         else:
-            det=None
+            det=ComprasDet()
         
         contexto={'productos':prod,'encabezado':enc,'detalle':det,'form_enc':form_compras}
 
@@ -152,12 +152,12 @@ def compras(request,compra_id=None):
         if not compra_id:
             return redirect("cmp:compras_list")
         
-        producto = request.POST.get("id_id_producto")
-        cantidad = request.POST.get("id_cantidad_detalle")
-        precio = request.POST.get("id_precio_detalle")
-        sub_total_detalle = request.POST.get("id_sub_total_detalle")
-        descuento_detalle  = request.POST.get("id_descuento_detalle")
-        total_detalle  = request.POST.get("id_total_detalle")
+        producto= request.POST.get("id_id_producto")
+        cantidad= request.POST.get("id_cantidad_detalle")
+        precio= request.POST.get("id_precio_detalle")
+        sub_total_detalle= request.POST.get("id_sub_total_detalle")
+        descuento_detalle= request.POST.get("id_descuento_detalle")
+        total_detalle= request.POST.get("id_total_detalle")
 
         prod = Producto.objects.get(pk=producto)
 
@@ -193,14 +193,9 @@ class CompraDetDelete(SinPrivilegios, generic.DeleteView):
     context_object_name = 'obj'
     
     def get_success_url(self):
-          compra_id=self.kwargs['compra_id']
-          return reverse_lazy('cmp:compras_edit', kwargs={'compra_id': compra_id})
-      
-      
-      
-
+        compra_id=self.kwargs['compra_id']
+        return reverse_lazy('cmp:compras_edit', kwargs={'compra_id': compra_id})
 
 def chartView(request):
-    
     # return render(request, template_name='chart/chart.html',)
-    return render(request, template_name='chart/chart2.html',)
+    return render(request,template_name='chart/chart.html',)

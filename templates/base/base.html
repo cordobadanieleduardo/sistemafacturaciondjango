@@ -19,10 +19,10 @@
   <!-- Custom styles for this template-->
   <link href="{% static  'base/css/sb-admin-2.min.css' %}" rel="stylesheet">
 
-   <!-- Custom styles for this page -->
-   <link href="{% static 'base/vendor/datatables/dataTables.bootstrap4.min.css'%}" rel="stylesheet">
+  <!-- Custom styles for this page -->
+  <link href="{% static 'base/vendor/datatables/dataTables.bootstrap4.min.css'%}" rel="stylesheet">
 
-   <!-- jQuery Confirm -->
+  <!-- jQuery Confirm -->
   <link rel="stylesheet" href="{% static 'base/vendor/jquery_confirm/jquery-confirm.min.css' %}">
 
   <!-- XDSoft DateTimePicker -->  
@@ -218,10 +218,10 @@
         {% block top_bar %}
         <nav class="navbar navbar-expand navbar-light bg-white topbar mb-4 static-top shadow">
 
-          <!-- Sidebar Toggle (Topbar) 
+          <!-- Sidebar Toggle (Topbar) -->
           <button id="sidebarToggleTop" class="btn btn-link d-md-none rounded-circle mr-3">
             <i class="fa fa-bars"></i>
-          </button> -->
+          </button> 
 
           <!-- Topbar Search 
           <form class="d-none d-sm-inline-block form-inline mr-auto ml-md-3 my-2 my-md-0 mw-100 navbar-search">
@@ -418,7 +418,7 @@
       <footer class="sticky-footer bg-white">
         <div class="container my-auto">
           <div class="copyright text-center my-auto">
-            <span>Copyright &copy; Your Website 2019</span>
+            <span>Copyright &copy; Website 2025</span>
           </div>
         </div>
       </footer>
@@ -441,12 +441,12 @@
     <div class="modal-dialog" role="document">
       <div class="modal-content">
         <div class="modal-header">
-          <h5 class="modal-title" id="exampleModalLabel">¿Cerrar Sesión para <mark> {{ user.username}} </mark>?</h5>
+          <h5 class="modal-title" id="exampleModalLabel">¿Cerrar sesión para <mark> {{ user.username}} </mark>?</h5>
           <button class="close" type="button" data-dismiss="modal" aria-label="Close">
             <span aria-hidden="true">×</span>
           </button>
         </div>
-        <div class="modal-body">Al dar click en el botón Salir, cerrará la sesión para <mark> {{ user.username}} </mark>  </div>
+        <div class="modal-body">Al dar click en el botón salir, cerrará la sesión para <mark> {{ user.username}} </mark>  </div>
         <div class="modal-footer">
           <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancelar</button>
           <a class="btn btn-primary" href="{% url 'bases:logout' %}">Salir</a>
@@ -466,6 +466,7 @@
 
   <!-- Custom scripts for all pages-->
   <script src="{% static  'base/js/sb-admin-2.min.js' %}"></script>
+  <script src="{% static  'base/js/jquery.chained.min.js' %}"></script>
 
   <!-- Page level plugins -->
   <script src="{% static 'base/vendor/datatables/jquery.dataTables.min.js'%}"></script>
@@ -479,23 +480,13 @@
   <script src="https://unpkg.com/bootstrap-table@1.15.3/dist/bootstrap-table-locale-all.min.js"></script>
 
   <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.8/js/select2.min.js"></script>
-
-  <script src="{% static  'base/js/jquery.chained.min.js' %}"></script>
-
-  <!-- Page level plugins -->
-  <script src="{% static  'base/vendor/chart.js/Chart.min.js' %}"></script>
-
-  <!-- Page level custom scripts -->
-  <script src="{% static 'base/js/demo/chart-area-demo.js' %}"></script>
-  <script src="{% static 'base/js/demo/chart-pie-demo.js' %}"></script>
-  <script src="{% static 'base/js/demo/chart-bar-demo.js' %}"></script>
-
+  
   <script>
     $(document).ready(function () {
       $("#sidebarToggle").click();
       jQuery.datetimepicker.setLocale('es');
     });
-</script>
+  </script>
 
   {% block control_modal%}
   <script>

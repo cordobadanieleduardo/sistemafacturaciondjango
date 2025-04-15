@@ -1,113 +1,91 @@
+{% extends 'base/base.html'%}
 {% load static %}
-<!DOCTYPE html>
-<html lang="en">
+{% block page_content %}
 
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+<!-- Content Wrapper -->
+<div id="content-wrapper" class="d-flex flex-column">
 
-    <!-- Custom fonts for this template-->
-    <link href="{% static 'base/vendor/fontawesome-free/css/all.min.css' %}" rel="stylesheet" type="text/css">
-    <link href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i" rel="stylesheet">
+    <!-- Main Content -->
+    <div id="content">
 
-    <!-- Custom styles for this template-->
-    <link href="{% static 'base/css/sb-admin-2.min.css' %}" rel="stylesheet">
-</head>
+        <!-- Begin Page Content -->
+        <div class="container-fluid">
 
-<body>
+            <!-- Page Heading -->
+            <h1 class="h3 mb-2 text-gray-800">Charts</h1>
+            <p class="mb-4">Chart.js </p>
 
-    <!-- Content Wrapper -->
-    <div id="content-wrapper" class="d-flex flex-column">
+            <!-- Content Row -->
+            <div class="row">
 
-        <!-- Main Content -->
-        <div id="content">
+                <div class="col-xl-8 col-lg-7">
 
-            <!-- Begin Page Content -->
-            <div class="container-fluid">
-
-                <!-- Page Heading -->
-                <h1 class="h3 mb-2 text-gray-800">Charts</h1>
-                    <p class="mb-4">Chart.js </p>
-
-                <!-- Content Row -->
-                <div class="row">
-
-                    <div class="col-xl-8 col-lg-7">
-
-                        <!-- Area Chart -->
-                        <div class="card shadow mb-4">
-                            <div class="card-header py-3">
-                                <h6 class="m-0 font-weight-bold text-primary">Area Chart</h6>
-                            </div>
-                            <div class="card-body">
-                                <div class="chart-area">
-                                    <canvas id="myAreaChart"></canvas>
-                                </div>
-                                <hr>
-                                text
-                            </div>
+                    <!-- Area Chart -->
+                    <div class="card shadow mb-4">
+                        <div class="card-header py-3">
+                            <h6 class="m-0 font-weight-bold text-primary">Area Chart</h6>
                         </div>
-
-                        <!-- Bar Chart -->
-                        <div class="card shadow mb-4">
-                            <div class="card-header py-3">
-                                <h6 class="m-0 font-weight-bold text-primary">Bar Chart</h6>
+                        <div class="card-body">
+                            <div class="chart-area">
+                                <canvas id="myAreaChart"></canvas>
                             </div>
-                            <div class="card-body">
-                                <div class="chart-bar">
-                                    <canvas id="myBarChart"></canvas>
-                                </div>
-                                <hr>
-                                text
-                            </div>
+                            <hr>
+                            text
                         </div>
-
                     </div>
 
-                    <!-- Donut Chart -->
-                    <div class="col-xl-4 col-lg-5">
-                        <div class="card shadow mb-4">
-                            <!-- Card Header - Dropdown -->
-                            <div class="card-header py-3">
-                                <h6 class="m-0 font-weight-bold text-primary">Donut Chart</h6>
+                    <!-- Bar Chart -->
+                    <div class="card shadow mb-4">
+                        <div class="card-header py-3">
+                            <h6 class="m-0 font-weight-bold text-primary">Bar Chart</h6>
+                        </div>
+                        <div class="card-body">
+                            <div class="chart-bar">
+                                <canvas id="myBarChart"></canvas>
                             </div>
-                            <!-- Card Body -->
-                            <div class="card-body">
-                                <div class="chart-pie pt-4">
-                                    <canvas id="myPieChart"></canvas>
-                                </div>
-                                <hr>
-                                text
+                            <hr>
+                            text
+                        </div>
+                    </div>
+
+                </div>
+
+                <!-- Donut Chart -->
+                <div class="col-xl-4 col-lg-5">
+                    <div class="card shadow mb-4">
+                        <!-- Card Header - Dropdown -->
+                        <div class="card-header py-3">
+                            <h6 class="m-0 font-weight-bold text-primary">Donut Chart</h6>
+                        </div>
+                        <!-- Card Body -->
+                        <div class="card-body">
+                            <div class="chart-pie pt-4">
+                                <canvas id="myPieChart"></canvas>
                             </div>
+                            <hr>
+                            text
                         </div>
                     </div>
                 </div>
-
             </div>
-            <!-- /.container-fluid -->
 
         </div>
-        <!-- End of Main Content -->
+        <!-- /.container-fluid -->
 
+    </div>
+    <!-- End of Main Content -->
+</div>
 
-        <!-- Bootstrap core JavaScript-->
-        <script src="{% static  'base/vendor/jquery/jquery.min.js' %}"></script>
-        <script src="{% static  'base/vendor/bootstrap/js/bootstrap.bundle.min.js' %}"></script>
+{% endblock %}
 
-        <!-- Core plugin JavaScript-->
-        <script src="{% static  'base/vendor/jquery-easing/jquery.easing.min.js' %}"></script>
+{% block js_page %}
 
-        <!-- Custom scripts for all pages-->
-        <script src="{% static  'base/js/sb-admin-2.min.js' %}"></script>
+<!-- Page level plugins -->
+<script src="{% static  'base/vendor/chart.js/Chart.min.js' %}"></script>
 
-        <!-- Page level plugins -->
-        <script src="{% static  'base/vendor/chart.js/Chart.min.js' %}"></script>
+<!-- Page level custom scripts -->
+<script src="{% static  'base/js/demo/chart-area-demo.js' %}"></script>
+<script src="{% static  'base/js/demo/chart-pie-demo.js' %}"></script>
+<script src="{% static  'base/js/demo/chart-bar-demo.js' %}"></script>
 
-        <!-- Page level custom scripts -->
-        <script src="{% static  'base/js/demo/chart-area-demo.js' %}"></script>
-        <script src="{% static  'base/js/demo/chart-pie-demo.js' %}"></script>
-        <script src="{% static  'base/js/demo/chart-bar-demo.js' %}"></script>
-
-</body>
-</html>
+{% endblock %}
